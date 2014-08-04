@@ -1,3 +1,5 @@
+XDGOPEN := $(shell xdg-open --version 2> /dev/null)
+
 all:
 	pdflatex -output-directory=build icse2015-archviol
 	cp *.bib *.bst build
@@ -12,4 +14,9 @@ clean:
 	rm build/*
 
 view:
-	open build/icse2015-archviol.pdf
+ifdef XDGOPEN
+	@xdg-open build/icse2015-archviol.pdf
+else
+	@open build/icse2015-archviol.pdf
+endif
+
